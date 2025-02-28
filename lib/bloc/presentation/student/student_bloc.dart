@@ -27,10 +27,19 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
       }catch(e){
         emit(StudentError(e.toString()));
       }
-
-
-
     });
+
+    //to update students
+    on<UpdateStudentEvent>((event,emit)async{
+      try{
+        await repository.updateStudentData(event.student);
+        emit(StudentUpdatedState());
+        add(LoadStudentsEvent());
+      }catch(e){
+        emit(StudentError(e.toString()));
+      }
+    });
+
 
   }
 }

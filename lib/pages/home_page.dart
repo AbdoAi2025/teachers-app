@@ -44,27 +44,61 @@ class _HomePageState extends State<HomePage> {
                     title: Text(group.groupName),
                     subtitle: Text("عدد الطلاب: ${group.studentCount ?? 0}"),
 
-                    // ✏️ زر التعديل
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit, color: Colors.orange),
-                      onPressed: () {
-                        // ✅ تحويل `GroupModel` إلى `UpdateGroupModel` قبل تمريره
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UpdateGroupPage(
-                              group: UpdateGroupModel(
-                                groupId: group.groupId,
-                                name: group.groupName,
-                                studentsIds: group.studentsIds,
-                                day: group.groupDay,
-                                timeFrom: group.timeFrom,
-                                timeTo: group.timeTo,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit, color: Colors.orange),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UpdateGroupPage(
+                                  group: UpdateGroupModel(
+                                    groupId: group.groupId,
+                                    name: group.groupName,
+                                    studentsIds: group.studentsIds,
+                                    day: group.groupDay,
+                                    timeFrom: group.timeFrom,
+                                    timeTo: group.timeTo,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        );
-                      },
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text("🗑️ تأكيد الحذف"),
+                                content: Text("هل أنت متأكد من حذف المجموعة؟"),
+                                actions: [
+                                  TextButton(
+                                    child: Text("إلغاء"),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                  TextButton(
+                                    child: Text("حذف"),
+                                    onPressed: () {
+                                      BlocProvider.of<GroupBloc>(context).add(DeleteGroupEvent(group.groupId));
+
+                                      BlocProvider.of<GroupBloc>(context).stream.listen((state) {
+                                        if (state is GroupDeletedState) {
+                                          Navigator.pop(context); // ✅ إغلاق الـ Dialog فقط عند نجاح الحذف
+                                        }
+                                      });
+                                    },
+
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 );

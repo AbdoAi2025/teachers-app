@@ -263,7 +263,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teachers_app/bloc/presentation/group/group_bloc.dart';
 import 'package:teachers_app/bloc/presentation/group/group_event.dart';
-import 'package:teachers_app/bloc/presentation/group/group_state.dart';
 import 'package:teachers_app/models/data/add_group_model.dart';
 import 'package:teachers_app/pages/home_page.dart';
 
@@ -422,13 +421,21 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
           child: Column(children: [
             TextField(controller: _nameController, decoration: InputDecoration(labelText: "📌 اسم المجموعة")),
             SizedBox(height: 16),
-            InkWell(onTap: _showDayPicker, child: _buildField("📅 اليوم", _selectedDay ?? "اختر يومًا")),
+            InkWell
+              (onTap: _showDayPicker,
+                child: _buildField("📅 اليوم", _selectedDay ?? "اختر يومًا")),
             SizedBox(height: 16),
-            InkWell(onTap: () => _pickTime(true), child: _buildField("⏰ وقت البداية", _timeFrom?.format(context) ?? "اختر وقت البداية")),
+            InkWell
+              (onTap: () => _pickTime(true),
+                child: _buildField("⏰ وقت البداية", _timeFrom?.format(context) ?? "اختر وقت البداية")),
             SizedBox(height: 16),
-            InkWell(onTap: () => _pickTime(false), child: _buildField("⏰ وقت النهاية", _timeTo?.format(context) ?? "اختر وقت النهاية")),
+            InkWell
+              (onTap: () => _pickTime(false),
+                child: _buildField("⏰ وقت النهاية", _timeTo?.format(context) ?? "اختر وقت النهاية")),
             SizedBox(height: 16),
-            InkWell(onTap: _showGradePicker, child: _buildField("🏫 الصف", _selectedGrade ?? "اختر الصف")),
+            InkWell
+              (onTap: _showGradePicker,
+                child: _buildField("🏫 الصف", _selectedGrade ?? "اختر الصف")),
             SizedBox(height: 16),
             InkWell(
               onTap: _showStudentPicker,

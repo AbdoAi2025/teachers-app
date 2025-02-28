@@ -19,7 +19,7 @@ class DioHelper {
     print("🔑 التوكين تم حفظه: $token");
   }
 
-  // 🏷️ إرسال بيانات باستخدام POST
+  // ️ إرسال بيانات باستخدام POST
   static Future<Response> postData({
     required String url,
     required Map<String, dynamic> data,
@@ -27,14 +27,14 @@ class DioHelper {
     return await dio.post(url, data: data);
   }
 
-  // 🏷️ جلب البيانات باستخدام  GET groups
+  // ️ جلب البيانات باستخدام  GET groups
   static Future<Response> getData(String url, {Map<String, dynamic>? query}) async {
     return await dio.get(url, queryParameters: query);
   }
 
 
 
-  // 🟢 دالة خاصة لإنشاء مجموعة جديدة
+  //  دالة خاصة لإنشاء مجموعة جديدة
   static Future<Response> postGroupData(Map<String, dynamic> groupData) async {
     return await dio.post("groups/add", data: groupData);
   }
@@ -46,8 +46,15 @@ class DioHelper {
   }
 
 
+  // دالة خاصة لمسح مجموعة باستخدام DELETE
+  static Future<Response> deleteGroup(String groupId) async {
+    return await dio.delete("groups/delete/$groupId");
+  }
 
-  // 🏷️ تحميل بيانات الطلاب
+
+
+
+  //  تحميل بيانات الطلاب
   static Future<List<dynamic>> fetchStudents({bool hasGroups = false}) async {
     try {
       final response = await getData("students/myStudents", query: {"hasGroups": hasGroups});
@@ -59,9 +66,24 @@ class DioHelper {
     }
   }
 
-  // 🟢 دالة خاصة لإنشاء طالب جديد
+  //  دالة خاصة لإنشاء طالب جديد
   static Future<Response> postStudentData(Map<String, dynamic> studentData) async {
     return await dio.post("students/add", data: studentData);
   }
+
+
+  //دالةخاصة بتعديل طالب جديد
+
+  static Future<Response> putStudentData (Map<String,dynamic> updateStudentData) async{
+    return await dio.put("students/update",data: updateStudentData);
+  }
+
+
+  static Future<Response> deleteStudent(String studentId) async {
+    return await dio.delete("students/delete/$studentId");
+  }
+
+
+
 
 }

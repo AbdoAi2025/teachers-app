@@ -15,3 +15,5 @@ class StudentError extends StudentState {
 }
 
 class StudentCreatedState extends  StudentState{}
+
+class StudentUpdatedState extends  StudentState{}

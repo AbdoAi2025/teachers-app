@@ -1,6 +1,7 @@
-import 'package:dio/dio.dart';
+
 import 'package:teachers_app/models/data/add_student_model.dart';
 import 'package:teachers_app/models/data/student_model.dart';
+import 'package:teachers_app/models/data/update_student_model.dart';
 import 'package:teachers_app/network/core/dio_helper.dart';
 
 abstract class StudentRepository {
@@ -8,6 +9,7 @@ abstract class StudentRepository {
 
   Future<void> createStudent(AddStudentModel student);
 
+  Future<void> updateStudentData(UpdateStudentModel student);
 }
 
 class StudentRepositoryImpl implements StudentRepository {
@@ -33,6 +35,11 @@ class StudentRepositoryImpl implements StudentRepository {
   @override
   Future<void> createStudent(AddStudentModel student) async {
     await DioHelper.postStudentData(student.toJson());
+  }
+
+  @override
+  Future<void> updateStudentData(UpdateStudentModel student) async  {
+    await DioHelper.putStudentData(student.toJson());
   }
 
 }

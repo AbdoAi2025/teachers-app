@@ -22,3 +22,5 @@ class GroupErrorState extends GroupState {
 class GroupCreatedState extends GroupState {}
 
 class GroupUpdatedState extends GroupState{}
+
+class GroupDeletedState extends GroupState {}

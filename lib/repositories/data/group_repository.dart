@@ -13,9 +13,14 @@ abstract class GroupRepository {
   Future<void> createGroup(AddGroupModel group);
 
   Future<void> updateGroup(UpdateGroupModel group);
+
+  Future<void> deleteGroup(String groupId); // ✅ إضافة دالة الحذف
+
 }
 
 class GroupRepositoryImpl implements GroupRepository {
+
+
   @override
   Future<List<GroupModel>> getGroups() async {
     final response = await DioHelper.getData('groups/myGroups');
@@ -31,6 +36,11 @@ class GroupRepositoryImpl implements GroupRepository {
   Future<void> updateGroup(UpdateGroupModel group) async{
     await DioHelper.putData(group.toJson());
 
+  }
+
+  @override
+  Future<void> deleteGroup(String groupId) async {
+    await DioHelper.deleteGroup(groupId); // استدعاء دالة الحذف من DioHelper
   }
 
 }

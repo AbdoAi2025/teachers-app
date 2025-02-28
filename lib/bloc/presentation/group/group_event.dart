@@ -19,3 +19,8 @@ class UpdateGroupEvent extends GroupEvent{
   final UpdateGroupModel group;
   UpdateGroupEvent(this.group);
 }
+
+class DeleteGroupEvent extends GroupEvent {
+  final String groupId;
+  DeleteGroupEvent(this.groupId);
+}
