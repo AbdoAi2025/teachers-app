@@ -82,7 +82,7 @@ class _StudentScreenState extends State<StudentScreen> {
                                   name: student.studentName,
                                   phone: student.studentPhone,
                                   parentPhone: student.studentParentPhone,
-                                  gradeId: int.tryParse(student.gradeNameAr) ?? 1,
+                                  gradeId: int.tryParse(student.gradeNameAr.replaceAll(RegExp(r'[^0-9]'), '')) ?? 1, // ✅ استخلاص الرقم من `gradeNameAr`
                                 ),
                               ),
                             ),

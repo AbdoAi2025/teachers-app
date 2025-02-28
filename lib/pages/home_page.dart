@@ -6,7 +6,6 @@ import 'package:teachers_app/bloc/presentation/group/group_state.dart';
 import 'package:teachers_app/bloc/presentation/student/student_bloc.dart';
 import 'package:teachers_app/bloc/presentation/student/student_event.dart';
 import 'package:teachers_app/models/data/update_group_model.dart';
-import 'package:teachers_app/models/data/group_model.dart';
 import 'package:teachers_app/pages/create_group_page.dart';
 import 'package:teachers_app/pages/student_screen.dart';
 import 'package:teachers_app/pages/update_group_page.dart';

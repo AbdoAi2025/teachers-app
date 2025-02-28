@@ -32,6 +32,8 @@ class _UpdateStudentPageState extends State<UpdateStudentPage> {
     _nameController.text = widget.student.name;
     _phoneController.text = widget.student.phone;
     _parentPhoneController.text = widget.student.parentPhone;
+    _selectedGrade                   =widget.student.gradeId;
+
   }
 
 
@@ -60,12 +62,15 @@ class _UpdateStudentPageState extends State<UpdateStudentPage> {
       return;
     }
 
+
+    print("📌 `gradeId` قبل الإرسال: $_selectedGrade"); // ✅ تأكد من أن `gradeId` ليس `null` أو `غير صحيح`
+
     final newStudent = UpdateStudentModel(
-      studentId:_studentIdController.text,
+      studentId:widget.student.studentId,      //  تأكد من تمرير ID الطالب
       gradeId: _selectedGrade!,
-      phone: _phoneController.text,
-      parentPhone: _parentPhoneController.text,
-      name: _nameController.text,
+      phone: _phoneController.text.trim(),
+      parentPhone: _parentPhoneController.text.trim(),
+      name: _nameController.text.trim(),
 
     );
 
@@ -79,7 +84,16 @@ class _UpdateStudentPageState extends State<UpdateStudentPage> {
     );
 
     BlocProvider.of<StudentBloc>(context).add(UpdateStudentEvent(newStudent));
+
+    BlocProvider.of<StudentBloc>(context).stream.listen((state) {
+      if (state is StudentUpdatedState) {
+        Navigator.pop(context); // ✅ العودة بعد نجاح التحديث
+      }
+    });
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {

@@ -72,11 +72,22 @@ class DioHelper {
   }
 
 
-  //دالةخاصة بتعديل طالب جديد
+  static Future<Response> putStudentData(Map<String, dynamic> updateStudentData) async {
+    try {
+      print("📡 إرسال طلب تعديل الطالب...");
+      print("📤 البيانات المرسلة (JSON): ${updateStudentData}"); // ✅ طباعة البيانات قبل الإرسال
 
-  static Future<Response> putStudentData (Map<String,dynamic> updateStudentData) async{
-    return await dio.put("students/update",data: updateStudentData);
+      Response response = await dio.put("students/update", data: updateStudentData);
+
+      print("✅ استجابة API بعد التعديل: ${response.data}"); // ✅ طباعة استجابة الـ API
+      return response;
+    } catch (e) {
+      print("❌ خطأ في طلب التعديل: $e");
+      throw Exception("فشل تعديل الطالب: $e");
+    }
   }
+
+
 
 
   static Future<Response> deleteStudent(String studentId) async {

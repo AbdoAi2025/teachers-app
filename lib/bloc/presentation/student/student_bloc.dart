@@ -29,16 +29,22 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
       }
     });
 
-    //to update students
-    on<UpdateStudentEvent>((event,emit)async{
-      try{
+    on<UpdateStudentEvent>((event, emit) async {
+      try {
+        print("📡 استقبال `UpdateStudentEvent` وتنفيذ التعديل...");
+        print("📤 البيانات المرسلة إلى `repository`: ${event.student.toJson()}"); // ✅ تأكيد البيانات
+
         await repository.updateStudentData(event.student);
+
+        print("✅ تم تعديل الطالب بنجاح!");
         emit(StudentUpdatedState());
-        add(LoadStudentsEvent());
-      }catch(e){
-        emit(StudentError(e.toString()));
+        add(LoadStudentsEvent()); // ✅ إعادة تحميل القائمة بعد التعديل
+      } catch (e) {
+        print("❌ فشل تعديل الطالب: $e");
+        emit(StudentError("فشل تعديل الطالب: $e"));
       }
     });
+
 
 
   }
