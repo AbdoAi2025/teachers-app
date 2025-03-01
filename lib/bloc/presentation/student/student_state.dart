@@ -1,3 +1,4 @@
+import 'package:teachers_app/models/data/Load_student_by_Id_Model.dart';
 import 'package:teachers_app/models/data/student_model.dart';
 
 abstract class StudentState {}
@@ -17,3 +18,8 @@ class StudentError extends StudentState {
 class StudentCreatedState extends  StudentState{}
 
 class StudentUpdatedState extends  StudentState{}
+
+class StudentByIdLoaded extends StudentState {
+  final LoadStudentByIdModel student;
+  StudentByIdLoaded(this.student);
+}

@@ -96,5 +96,23 @@ class DioHelper {
 
 
 
+  static Future<Map<String, dynamic>> getStudentById(String studentId) async {
+    try {
+      print("📡 إرسال طلب لجلب بيانات الطالب ID: $studentId");
+
+      Response response = await dio.get("students/$studentId");
+
+      print("✅ استجابة API: ${response.data}");
+
+      return response.data; // إرجاع بيانات الطالب على شكل `Map`
+    } catch (e) {
+      print("❌ فشل جلب بيانات الطالب: $e");
+      throw Exception("فشل جلب بيانات الطالب: $e");
+    }
+  }
+
+
+
+
 
 }

@@ -20,3 +20,8 @@ class UpdateStudentEvent extends StudentEvent{
   UpdateStudentEvent(this.student);
 
 }
+
+class LoadStudentByIdEvent extends StudentEvent {
+  final String studentId;
+  LoadStudentByIdEvent(this.studentId);
+}

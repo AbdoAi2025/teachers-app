@@ -45,7 +45,15 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
       }
     });
 
-
-
+    on<LoadStudentByIdEvent>((event, emit) async {
+      try {
+        emit(StudentLoading());
+       final student= await repository.getStudentById(event.studentId);
+        emit(StudentByIdLoaded(student));
+        add(LoadStudentsEvent());
+      }catch(e){
+        emit(StudentError("فشل جلب بيانات الطالب: $e"));
+      }
+    });
   }
 }
